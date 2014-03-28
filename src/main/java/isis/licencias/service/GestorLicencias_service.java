@@ -15,9 +15,10 @@ public class GestorLicencias_service {
 	
 	@POST
     @Produces("application/octet-stream")
+	@ValidateRequest
     public Response getLicencia(@FormParam("CN") 
-    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios") 
-    						    String CN,
+    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
+    							String CN,
 			  					@FormParam("dni") String dni,
 			  					@FormParam("title") String title, 
 			  					@FormParam("OU") String OU,

@@ -1,6 +1,7 @@
 package isis.licencias.service;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -19,6 +20,7 @@ public class GestorLicencias_service {
 	@ValidateRequest
     public Response getLicencia(@FormParam("CN")
     							@NotNull
+    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
     							String CN,
 			  					@FormParam("dni") String dni,
 			  					@FormParam("title") String title, 

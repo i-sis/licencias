@@ -12,6 +12,21 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+
+
+		<!-- Dependencias agregadas por Mariana -->        
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>3.0.6.Final</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+		    <groupId>org.jboss.resteasy</groupId>
+		    <artifactId>resteasy-hibernatevalidator-provider</artifactId>
+		    <version>3.0.6.Final</version>
+		</dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>

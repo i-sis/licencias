@@ -1,5 +1,6 @@
 package isis.licencias.service;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,7 +17,9 @@ public class GestorLicencias_service {
 	@POST
     @Produces("application/octet-stream")
 	@ValidateRequest
-    public Response getLicencia(@FormParam("CN") String CN,
+    public Response getLicencia(@FormParam("CN")
+    							@NotNull
+    							String CN,
 			  					@FormParam("dni") String dni,
 			  					@FormParam("title") String title, 
 			  					@FormParam("OU") String OU,

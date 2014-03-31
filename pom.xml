@@ -14,7 +14,12 @@
         </dependency>
 
 
-		<!-- Dependencias agregadas por Mariana -->        
+		<!-- Dependencias agregadas por Mariana -->  
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs-all</artifactId>
+			<version>3.0.6.Final</version>
+		</dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>

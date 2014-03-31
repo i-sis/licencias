@@ -20,7 +20,7 @@ public class GestorLicencias_service {
 	@ValidateRequest
     public Response getLicencia(@FormParam("CN")
     							@NotNull
-    							@Pattern (regexp = "[A-Za-z]*", message = "debe contener solo letritas y espacios")
+    							@Pattern (regexp = "[A-Za-z]*", message = "debe contene solo letritas y espacios")
     							String CN,
 			  					@FormParam("dni") String dni,
 			  					@FormParam("title") String title, 

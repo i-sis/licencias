@@ -27,6 +27,8 @@ public class UsuarioLicenciado implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @Size(min = 1, max = 25)
+    @NotNull
     private String name;
     
     @NotNull

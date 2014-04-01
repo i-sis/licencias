@@ -7,6 +7,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.jboss.resteasy.plugins.validation.hibernate.ValidateRequest;
 
@@ -30,7 +31,13 @@ public class GestorLicencias_service {
 			  					@FormParam("ST") String ST,
 			  					@FormParam("C") String C)    {
 
-		Response response = Response.ok("HOLA NUEVO MUNDO").build();
-        return response;
+		if (!CN.isEmpty()){
+			Response response = Response.ok("HOLA NUEVO MUNDO").build();
+			return response;
+		}
+		else {
+			Response response = Response.status(Status.BAD_REQUEST).build();
+			return response;
+		}
 	}
 }

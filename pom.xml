@@ -5,6 +5,7 @@
     <artifactId>isis-licencias</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
+    
     <dependencies>
 		<!-- Dependencias agregadas por Mariana -->
 		<dependency>
@@ -38,26 +39,26 @@
         <maven.compiler.target>1.7</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
-<profiles>
+	<profiles>
         <profile>
-<!-- When built in OpenShift the openshift profile will be used when invoking mvn. -->
-<!-- Use this profile for any OpenShift specific customization your app will need. -->
-<!-- By default that is to put the resulting archive into the deployments folder. -->
-<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-<id>openshift</id>
-<build>
-   <finalName>isis-licencias</finalName>
-   <plugins>
-     <plugin>
-       <artifactId>maven-war-plugin</artifactId>
-       <version>2.2</version>
-       <configuration>
-         <outputDirectory>deployments</outputDirectory>
-         <warName>ROOT</warName>
-       </configuration>
-     </plugin>
-   </plugins>
- </build>
-</profile>
-    </profiles>
+			<!-- When built in OpenShift the openshift profile will be used when invoking mvn. -->
+			<!-- Use this profile for any OpenShift specific customization your app will need. -->
+			<!-- By default that is to put the resulting archive into the deployments folder. -->
+			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
+			<id>openshift</id>
+			<build>
+   				<finalName>isis-licencias</finalName>
+   				<plugins>
+     				<plugin>
+       					<artifactId>maven-war-plugin</artifactId>
+       					<version>2.2</version>
+       					<configuration>
+         					<outputDirectory>deployments</outputDirectory>
+         					<warName>ROOT</warName>
+       					</configuration>
+     				</plugin>
+   				</plugins>
+ 			</build>
+		</profile>
+	</profiles>
 </project>

@@ -100,6 +100,7 @@ public class GestorLicencias_service {
 			}
 		}
 		catch (RollbackException ex){
+			ex.printStackTrace();
 			System.out.println("ENCONTRE UNA ROLLBACKEXCEPTIONs");
 			System.out.println(ex.getMessage());
 			response = Response.status(Status.BAD_REQUEST);
@@ -108,12 +109,14 @@ public class GestorLicencias_service {
 		
 		catch (ConstraintViolationException ex) {
 			System.out.println("NO, FUE POR AQUI");
+			ex.printStackTrace();
 			//Handle bean validation issues
 			response = Response.status(Status.BAD_REQUEST);
 			return response.build();
 		} 
 		catch (ValidationException ex) {
 			System.out.println("ENTRE POR AQUI");
+			ex.printStackTrace();
 			//Handle the unique constrain violation
 			Map<String, String> responseObj = new HashMap<String, String>();
 			responseObj.put("email","Email taken");
@@ -122,11 +125,13 @@ public class GestorLicencias_service {
 		}
 		catch (PersistenceException ex){
 			System.out.println("ENCONTRO UNA PERSISTENCE EXCEPTION");
+			ex.printStackTrace();
 			response = Response.status(Status.BAD_REQUEST);
 			return response.build();
 		}
 		catch (Exception ex){
 			System.out.println("ENCONTRE UNA EXCEPCION	");
+			ex.printStackTrace();
 			response = Response.status(Status.BAD_REQUEST).entity(ex.getMessage()); 
 			return response.build();
 		} 

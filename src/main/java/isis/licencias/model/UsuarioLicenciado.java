@@ -49,23 +49,23 @@ public class UsuarioLicenciado implements Serializable {
     private String ou;
     
     @NotNull
-    @Size(min = 1, max = 40)
-    @Pattern(regexp = "[A-Za-z0-9 ]*", message = "debe contener letras o números y espacios")
+    @Size (min = 1, max = 40)
+    @Pattern (regexp = "[A-Za-z0-9 ]*", message = "Debe contener letras o numeros y espacios")
     private String organization;
 
     @NotNull
     @NotEmpty
-    @Email(message= "Debe colocar una dirección de email bien formada")
+    @Email (message= "Debe colocar una dirección de email bien formada")
     private String email;
 
     @NotNull
-    @Size(min = 1, max = 20)
-    @Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letras o espacios")
+    @Size (min = 1, max = 20)
+    @Pattern (regexp = "[A-Za-z ]*", message = "debe contener sólo letras o espacios")
     private String state;
     
     @NotNull
-    @Size(min = 1, max = 2, message = "debe contener sólo dos letras mayúsculas")
-    @Pattern(regexp = "[A-Z]*", message = "debe contener sólo dos letras mayúsculas")
+    @Size (min = 1, max = 2, message = "debe contener sólo dos letras mayúsculas")
+    @Pattern (regexp = "[A-Z]*", message = "debe contener sólo dos letras mayúsculas")
     private String country;
 
        

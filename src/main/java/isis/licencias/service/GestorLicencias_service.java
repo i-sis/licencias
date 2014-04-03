@@ -210,7 +210,7 @@ public class GestorLicencias_service {
 		       result.setIssuer(issuer);
 		       result.setConsumerAmount(1);
 		       result.setConsumerType("User");
-		       result.setInfo("Limita el numero de usuarios que pueden utilizar esta aplicacion");
+		       result.setInfo("Limita el número de usuarios que pueden utilizar esta aplicación");
 		       Date now = new Date();
 		       result.setIssued(now);
 		       now.setYear(now.getYear() + 1);

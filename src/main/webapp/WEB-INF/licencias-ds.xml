@@ -28,7 +28,7 @@
         pool-name="licencias" enabled="true"
         use-java-context="true">
         <connection-url>jdbc:mysql:mem:licencias;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1</connection-url>
-        <driver>org.mysql.jdbc.Driver</driver>
+        <driver>mysql</driver>
         <security>
             <user-name>admin2NNYjE8</user-name>
             <password>XfBGXsxuLK91</password>

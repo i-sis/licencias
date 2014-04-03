@@ -27,45 +27,45 @@ public class UsuarioLicenciado implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Pattern (regexp = "[A-Za-z ]*]", message = "debe contener solo letritas y espacios")
+    @Pattern (regexp = "[A-Za-z ]*]", message = "debe contener solo letras y espacios")
     @Size(min = 1, max = 25)
     @NotNull
     private String name;
     
     @NotNull
-    @Size (min = 8, max = 12, message = "Debe ser un numero de entre 8 y 12 digitos")
-    @Digits (fraction = 0, integer = 12, message = "Debe ser un numero de entre 8 y 12 digitos")
+    @Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
+    @Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
     @Column (name="dni")
     private String dni;
     
     @NotNull
     @Size (min = 1, max = 25)
-    @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener solo letras y espacios")
+    @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
     private String title;
     
     @NotNull
     @Size(min = 1, max = 40)
-    @Pattern(regexp="[A-Za-z0-9 ]*", message = "Debe contener letras o numeros y espacios")
+    @Pattern(regexp="[A-Za-z0-9 ]*", message = "Debe contener letras o números y espacios")
     private String ou;
     
     @NotNull
     @Size (min = 1, max = 40)
-    @Pattern (regexp = "[A-Za-z0-9 ]*", message = "Debe contener letras o numeros y espacios")
+    @Pattern (regexp = "[A-Za-z0-9 ]*", message = "Debe contener letras o números y espacios")
     private String organization;
 
     @NotNull
     @NotEmpty
-    @Email (message= "Debe colocar una direccion de email bien formada")
+    @Email (message= "Debe colocar una dirección de email bien formada")
     private String email;
 
     @NotNull
     @Size (min = 1, max = 20)
-    @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener solo letras o espacios")
+    @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras o espacios")
     private String state;
     
     @NotNull
-    @Size (min = 1, max = 2, message = "Debe contener solo dos letras mayusculas")
-    @Pattern (regexp = "[A-Z]*", message = "Debe contener solo dos letras mayusculas")
+    @Size (min = 1, max = 2, message = "Debe contener sólo dos letras mayúsculas")
+    @Pattern (regexp = "[A-Z]*", message = "Debe contener sólo dos letras mayúsculas")
     private String country;
 
        

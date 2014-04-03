@@ -27,20 +27,20 @@ public class UsuarioLicenciado implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
+    @Pattern (regexp = "[A-Za-z ]*]", message = "debe contener solo letritas y espacios")
     @Size(min = 1, max = 25)
     @NotNull
     private String name;
     
     @NotNull
-    @Size(min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
-    @Digits(fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
-    @Column(name = "dni")
+    @Size (min = 8, max = 12, message = "Debe ser un numero de entre 8 y 12 digitos")
+    @Digits (fraction = 0, integer = 12, message = "Debe ser un numero de entre 8 y 12 digitos")
+    @Column (name="dni")
     private String dni;
     
     @NotNull
-    @Size(min = 1, max = 25)
-    @Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letras y espacios")
+    @Size (min = 1, max = 25)
+    @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener solo letras y espacios")
     private String title;
     
     @NotNull

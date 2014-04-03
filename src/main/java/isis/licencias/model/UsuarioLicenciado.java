@@ -45,7 +45,7 @@ public class UsuarioLicenciado implements Serializable {
     
     @NotNull
     @Size(min = 1, max = 40)
-    @Pattern(regexp = "[A-Za-z0-9 ]*", message = "debe contener letras o números y espacios")
+    @Pattern (regexp = "[A-Za-z0-9 ]*", message = "debe contener letras o números y espacios")
     private String ou;
     
     @NotNull

@@ -26,7 +26,6 @@ import javax.ws.rs.core.Response.Status;
 
 import isis.licencias.controller.UsuarioLicenciadoDAO;
 import isis.licencias.model.UsuarioLicenciado;
-import org.jboss.resteasy.plugins.validation.hibernate.ValidateRequest;
 
 import de.schlichtherle.license.CipherParam;
 import de.schlichtherle.license.KeyStoreParam;

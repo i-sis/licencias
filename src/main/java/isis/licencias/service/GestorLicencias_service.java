@@ -16,6 +16,8 @@ import javax.persistence.RollbackException;
 import javax.security.auth.x500.X500Principal;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -36,7 +38,7 @@ import de.schlichtherle.license.LicenseParam;
 
 
 
-@Path ("/crear")
+@Path ("/")
 public class GestorLicencias_service {
 	
 	
@@ -65,19 +67,20 @@ public class GestorLicencias_service {
 			  					@FormParam("C") String C)    {
 
 		ResponseBuilder response = null;
-		newUsuario = new UsuarioLicenciado();
-		newUsuario.setName(CN);
-		newUsuario.setDni(dni);
-		newUsuario.setTitle(title);
-		newUsuario.setOu(OU);
-		newUsuario.setOrganization(O);
-		newUsuario.setEmail(email);
-		newUsuario.setState(ST);
-		newUsuario.setCountry(C);
 		
 		try {
+			newUsuario = new UsuarioLicenciado();
+			newUsuario.setName(CN);
+			newUsuario.setDni(dni);
+			newUsuario.setTitle(title);
+			newUsuario.setOu(OU);
+			newUsuario.setOrganization(O);
+			newUsuario.setEmail(email);
+			newUsuario.setState(ST);
+			newUsuario.setCountry(C);
+			
 			usuario.createUsuario(newUsuario);
-				
+			
 			/* Creo archivo temporal con la licencia */ 
 			File licencia_file = crearLicencia();
 			response = Response.ok((Object) licencia_file);

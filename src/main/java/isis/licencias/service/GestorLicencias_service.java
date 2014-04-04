@@ -16,8 +16,6 @@ import javax.persistence.RollbackException;
 import javax.security.auth.x500.X500Principal;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -56,7 +54,6 @@ public class GestorLicencias_service {
 	
 	@POST
     @Produces("application/octet-stream")
-	@ValidateRequest
     public Response getLicencia(@FormParam("CN") String CN,
 			  					@FormParam("dni") String dni,
 			  					@FormParam("title") String title, 

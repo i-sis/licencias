@@ -16,8 +16,6 @@ import javax.persistence.RollbackException;
 import javax.security.auth.x500.X500Principal;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -38,7 +36,7 @@ import de.schlichtherle.license.LicenseParam;
 
 
 
-@Path ("/")
+@Path ("/crear")
 public class GestorLicencias_service {
 	
 	
@@ -79,8 +77,7 @@ public class GestorLicencias_service {
 		
 		try {
 			usuario.createUsuario(newUsuario);
-		
-			System.out.println("PASE POR AQUI");	
+				
 			/* Creo archivo temporal con la licencia */ 
 			File licencia_file = crearLicencia();
 			response = Response.ok((Object) licencia_file);

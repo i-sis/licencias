@@ -26,7 +26,7 @@ public class UsuarioLicenciado implements Serializable {
     private Long id;
 
     /* 
-     * @Pattern (regexp = "[A-Za-z ]*]", message = "debe contener solo letritas y espacios")
+     * @Pattern (regexp = "[A-Za-z ]*]", message = "debe contener solo letras y espacios")
      * @Size(min = 1, max = 25)
      * @NotNull */
     private String name;

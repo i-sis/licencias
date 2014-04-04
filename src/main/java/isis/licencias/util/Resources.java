@@ -29,7 +29,7 @@ import javax.persistence.PersistenceContextType;
 public class Resources {
 	
 
-   @PersistenceContext(type = PersistenceContextType.EXTENDED)
+   @PersistenceContext
    private EntityManager em;
    
    

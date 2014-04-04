@@ -19,6 +19,12 @@ public class UsuarioLicenciadoDAOImplementacion implements UsuarioLicenciadoDAO 
     @Override
     public void createUsuario (UsuarioLicenciado usuario) {
     	System.out.println("VOY A INTENTAR PERSISTIR");
-    	em.persist(usuario);
+    	try {
+    		em.persist(usuario);
+    	}
+    	catch (Exception ex){
+    		System.out.println("ENTRE POR LA SUBCLASE");
+    		ex.printStackTrace();
+    	}
     }
 }

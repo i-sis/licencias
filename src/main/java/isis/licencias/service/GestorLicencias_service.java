@@ -16,6 +16,8 @@ import javax.persistence.RollbackException;
 import javax.security.auth.x500.X500Principal;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -26,6 +28,7 @@ import javax.ws.rs.core.Response.Status;
 
 import isis.licencias.controller.UsuarioLicenciadoDAO;
 import isis.licencias.model.UsuarioLicenciado;
+import org.jboss.resteasy.plugins.validation.hibernate.ValidateRequest;
 
 import de.schlichtherle.license.CipherParam;
 import de.schlichtherle.license.KeyStoreParam;
@@ -53,7 +56,10 @@ public class GestorLicencias_service {
 	
 	@POST
     @Produces("application/octet-stream")
-    public Response getLicencia(@FormParam("CN") String CN,
+	@ValidateRequest
+    public Response getLicencia(@FormParam("CN")
+    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
+    							String CN,
 			  					@FormParam("dni") String dni,
 			  					@FormParam("title") String title, 
 			  					@FormParam("OU") String OU,

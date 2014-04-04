@@ -4,6 +4,5 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 @ApplicationPath("/licencias")
-public class RESTConfiguration extends Application {
-
+public class RsJaxActivator extends Application {
 }

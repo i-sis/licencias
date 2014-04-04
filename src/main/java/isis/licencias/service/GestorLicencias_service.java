@@ -81,9 +81,8 @@ public class GestorLicencias_service {
 			newUsuario.setEmail(email);
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
-			log.info("Registrando " + newUsuario.getName());
-		
-		    usuario.createUsuario(newUsuario);
+
+			usuario.createUsuario(newUsuario);
 			
 			/* Creo archivo temporal con la licencia */ 
 			File licencia_file = crearLicencia();

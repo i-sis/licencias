@@ -82,15 +82,6 @@ public class GestorLicencias_service {
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
 			
-			System.out.println(newUsuario.getName());
-			System.out.println(newUsuario.getDni());
-			System.out.println(newUsuario.getTitle());
-			System.out.println(newUsuario.getOu());
-			System.out.println(newUsuario.getOrganization());
-			System.out.println(newUsuario.getEmail());
-			System.out.println(newUsuario.getState());
-			System.out.println(newUsuario.getCountry());
-
 			usuario.createUsuario(newUsuario);
 			
 			/* Creo archivo temporal con la licencia */ 

@@ -9,6 +9,7 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 /**
  * This class uses CDI to alias Java EE resources, such as the persistence context, to CDI beans. As it is a stateful bean, it
@@ -28,7 +29,7 @@ import javax.persistence.PersistenceContext;
 public class Resources {
 	
 
-   @PersistenceContext
+   @PersistenceContext(type = PersistenceContextType.EXTENDED)
    private EntityManager em;
    
    
@@ -39,7 +40,8 @@ public class Resources {
    
    
    @Produces
-   public Logger produceLog(InjectionPoint injectionPoint) {
-      return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+   public Logger getLogger(InjectionPoint ip) {
+       String category = ip.getMember().getDeclaringClass().getName();
+       return Logger.getLogger(category);
    }
-}
+ }

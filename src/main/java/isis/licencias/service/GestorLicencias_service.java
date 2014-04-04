@@ -57,10 +57,7 @@ public class GestorLicencias_service {
 	@POST
     @Produces("application/octet-stream")
 	@ValidateRequest
-    public Response getLicencia(@FormParam("CN")
-    							@NotNull
-    							@Pattern (regexp = "[A-Za-z]* ", message = "debe contene solo letraas y espacios")
-    							String CN,
+    public Response getLicencia(@FormParam("CN") String CN,
 			  					@FormParam("dni") String dni,
 			  					@FormParam("title") String title, 
 			  					@FormParam("OU") String OU,
@@ -70,22 +67,20 @@ public class GestorLicencias_service {
 			  					@FormParam("C") String C)    {
 
 		ResponseBuilder response = null;
+		newUsuario = new UsuarioLicenciado();
+		newUsuario.setName(CN);
+		newUsuario.setDni(dni);
+		newUsuario.setTitle(title);
+		newUsuario.setOu(OU);
+		newUsuario.setOrganization(O);
+		newUsuario.setEmail(email);
+		newUsuario.setState(ST);
+		newUsuario.setCountry(C);
 		
 		try {
-			newUsuario = new UsuarioLicenciado();
-			newUsuario.setName(CN);
-			newUsuario.setDni(dni);
-			newUsuario.setTitle(title);
-			newUsuario.setOu(OU);
-			newUsuario.setOrganization(O);
-			newUsuario.setEmail(email);
-			newUsuario.setState(ST);
-			newUsuario.setCountry(C);
-			
-			System.out.println("PASE POR AQUI");
-			
 			usuario.createUsuario(newUsuario);
-			
+		
+			System.out.println("PASE POR AQUI");	
 			/* Creo archivo temporal con la licencia */ 
 			File licencia_file = crearLicencia();
 			response = Response.ok((Object) licencia_file);

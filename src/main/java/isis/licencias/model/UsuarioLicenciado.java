@@ -12,14 +12,12 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
-@XmlRootElement
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "dni"))
 public class UsuarioLicenciado implements Serializable {
 

@@ -29,6 +29,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 
 import isis.licencias.controller.UsuarioLicenciadoDAO;
 import isis.licencias.model.UsuarioLicenciado;
@@ -43,7 +45,6 @@ import de.schlichtherle.license.LicenseParam;
 
 
 @Path ("/")
-@ValidateRequest
 public class GestorLicencias_service {
 	
 	
@@ -63,7 +64,8 @@ public class GestorLicencias_service {
     @Produces("application/octet-stream")
 	@ValidateRequest
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response getLicencia(@FormParam("CN")
+    public Response getLicencia(@Context HttpHeaders headers,
+    							@FormParam("CN")
     							@NotNull
     							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
     							String CN,

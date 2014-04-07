@@ -60,7 +60,7 @@ public class GestorLicencias_service {
 	
 	@POST
     @Produces("application/octet-stream")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes("application/x-www-form-urlencoded")
 	@ValidateRequest
     public Response getLicencia(@FormParam("CN")
     							@NotNull

@@ -66,7 +66,8 @@ public class GestorLicencias_service {
     @Produces("application/octet-stream")
 	@ValidateRequest
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response getLicencia(@FormParam("CN")
+    public Response getLicencia(@Context HttpHeaders headers,
+    							@FormParam("CN")
     							@NotNull
     							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
     							String CN,
@@ -86,7 +87,6 @@ public class GestorLicencias_service {
 			  					@FormParam("ST") String ST,
 			  					@FormParam("C") String C)    {
 
-		System.out.println("PASE POR AQUI CHABON");
 		ResponseBuilder response = null;
 		
 		try {

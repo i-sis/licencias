@@ -32,8 +32,6 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 
-import org.jboss.resteasy.spi.validation.ValidateRequest;
-
 import isis.licencias.controller.UsuarioLicenciadoDAO;
 import isis.licencias.model.UsuarioLicenciado;
 
@@ -64,7 +62,7 @@ public class GestorLicencias_service {
 	
 	@POST
     @Produces("application/octet-stream")
-	@ValidateRequest
+	@org.jboss.resteasy.plugins.validation.hibernate.ValidateRequest
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response getLicencia(@FormParam("CN")
     							@NotNull

@@ -79,6 +79,7 @@ public class GestorLicencias_service {
 			  					@FormParam("ST") String ST,
 			  					@FormParam("C") String C)    {
 
+		System.out.println("PASE POR AQUI CHABON");
 		ResponseBuilder response = null;
 		
 		try {

@@ -16,8 +16,10 @@ import javax.persistence.RollbackException;
 import javax.security.auth.x500.X500Principal;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -61,8 +63,16 @@ public class GestorLicencias_service {
     							@NotNull
     							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
     							String CN,
-			  					@FormParam("dni") String dni,
-			  					@FormParam("title") String title, 
+			  					@FormParam("dni") 
+    							@NotNull
+    							@Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
+    							@Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
+    							String dni,
+			  					@FormParam("title") 
+    							@NotNull
+    							@Size (min = 1, max = 25)
+    							@Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
+    							String title, 
 			  					@FormParam("OU") String OU,
 			  					@FormParam("O") String O,
 			  					@FormParam("email") String email,

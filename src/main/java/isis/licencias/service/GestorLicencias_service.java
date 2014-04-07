@@ -32,9 +32,11 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 
+import org.jboss.resteasy.plugins.validation.hibernate.ValidateRequest;
+
 import isis.licencias.controller.UsuarioLicenciadoDAO;
 import isis.licencias.model.UsuarioLicenciado;
-import org.jboss.resteasy.plugins.validation.hibernate.ValidateRequest;
+
 
 import de.schlichtherle.license.CipherParam;
 import de.schlichtherle.license.KeyStoreParam;
@@ -63,7 +65,7 @@ public class GestorLicencias_service {
 	@POST
     @Produces("application/octet-stream")
 	@ValidateRequest
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes({MediaType.APPLICATION_JSON})
     public Response getLicencia(@Context HttpHeaders headers,
     							@FormParam("CN")
     							@NotNull

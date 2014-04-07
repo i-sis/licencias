@@ -32,7 +32,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 
-import org.jboss.resteasy.plugins.validation.hibernate.ValidateRequest;
+import org.jboss.resteasy.spi.validation.ValidateRequest;
 
 import isis.licencias.controller.UsuarioLicenciadoDAO;
 import isis.licencias.model.UsuarioLicenciado;

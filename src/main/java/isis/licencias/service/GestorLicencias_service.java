@@ -43,6 +43,7 @@ import de.schlichtherle.license.LicenseParam;
 
 
 @Path ("/")
+@ValidateRequest
 public class GestorLicencias_service {
 	
 	
@@ -60,8 +61,8 @@ public class GestorLicencias_service {
 	
 	@POST
     @Produces("application/octet-stream")
-	@Consumes("application/x-www-form-urlencoded")
 	@ValidateRequest
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response getLicencia(@FormParam("CN")
     							@NotNull
     							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")

@@ -23,8 +23,9 @@ import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
@@ -59,26 +60,27 @@ public class GestorLicencias_service {
 	
 	@POST
     @Produces("application/octet-stream")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@ValidateRequest
-    public Response getLicencia(@PathParam("CN")
+    public Response getLicencia(@FormParam("CN")
     							@NotNull
     							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
     							String CN,
-			  					@PathParam("dni") 
+			  					@FormParam("dni") 
     							@NotNull
     							@Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
     							@Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
     							String dni,
-			  					@PathParam("title") 
+			  					@FormParam("title") 
     							@NotNull
     							@Size (min = 1, max = 25)
     							@Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
     							String title, 
-			  					@PathParam("OU") String OU,
-			  					@PathParam("O") String O,
-			  					@PathParam("email") String email,
-			  					@PathParam("ST") String ST,
-			  					@PathParam("C") String C)    {
+			  					@FormParam("OU") String OU,
+			  					@FormParam("O") String O,
+			  					@FormParam("email") String email,
+			  					@FormParam("ST") String ST,
+			  					@FormParam("C") String C)    {
 
 		System.out.println("PASE POR AQUI CHABON");
 		ResponseBuilder response = null;

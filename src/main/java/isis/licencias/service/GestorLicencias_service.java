@@ -69,7 +69,7 @@ public class GestorLicencias_service {
     public Response getLicencia(@Context HttpHeaders headers,
     							@FormParam("CN")
     							@NotNull
-    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
+    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letras y espacios")
     							String CN,
 			  					@FormParam("dni") 
     							@NotNull

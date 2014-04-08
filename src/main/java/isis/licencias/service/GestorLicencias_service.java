@@ -28,8 +28,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
-import org.jboss.resteasy.plugins.validation.hibernate.ValidateRequest;
-
 import isis.licencias.controller.UsuarioLicenciadoDAO;
 import isis.licencias.model.UsuarioLicenciado;
 

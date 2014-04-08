@@ -37,7 +37,7 @@
 		    <groupId>org.jboss.resteasy</groupId>
 		    <artifactId>resteasy-validator-provider-11</artifactId>
        		<version>3.0.6.Final</version>
-    	</dependency>    
+    	</dependency>
     </dependencies>
    
     <properties>

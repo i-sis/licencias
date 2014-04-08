@@ -66,8 +66,7 @@ public class GestorLicencias_service {
     @Produces("application/octet-stream")
 	@ValidateRequest
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response getLicencia(@Context HttpHeaders headers,
-    							@FormParam("CN")
+    public Response getLicencia(@FormParam("CN")
     							@NotNull
     							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
     							String CN,

@@ -28,6 +28,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
+import org.jboss.resteasy.plugins.validation.hibernate.ValidateRequest;
+
 import isis.licencias.controller.UsuarioLicenciadoDAO;
 import isis.licencias.model.UsuarioLicenciado;
 
@@ -58,6 +60,7 @@ public class GestorLicencias_service {
 	
 	@POST
     @Produces("application/octet-stream")
+	@ValidateRequest
     public Response getLicencia(@FormParam("CN")
     							@NotNull
     							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letras y espacios")

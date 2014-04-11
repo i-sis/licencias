@@ -29,6 +29,7 @@
 		   <groupId>org.jboss.resteasy</groupId>
 		   <artifactId>resteasy-hibernatevalidator-provider</artifactId>
    			<version>3.0.7.Final</version>
+   			<scope>provided</scope>
 		</dependency>
 	</dependencies>
    

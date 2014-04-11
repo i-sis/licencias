@@ -20,6 +20,18 @@
         	<artifactId>truelicense-core</artifactId>
         	<version>1.33</version>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>3.0.7.Final</version>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
+		    <groupId>org.jboss.resteasy</groupId>
+		    <artifactId>resteasy-validator-provider-11</artifactId>
+       		<version>3.0.7.Final</version>
+       		<scope>provided</scope>
+    	</dependency>
     </dependencies>
    
     <properties>

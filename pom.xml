@@ -6,6 +6,18 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     
+    
+    <dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-bom</artifactId>
+            <version>3.0.7.Final</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+	</dependencyManagement>
        
     <dependencies>
 		<!-- Dependencias agregadas por Mariana -->

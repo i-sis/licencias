@@ -59,7 +59,7 @@ public class GestorLicencias_service {
     @Produces("application/octet-stream")
     public Response getLicencia(@FormParam("CN")
     							@NotNull
-    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letras y espacios")
+    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letritas y espacios")
     							String CN,
 			  					@FormParam("dni") 
     							@NotNull

@@ -23,8 +23,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-*/
-import javax.validation.BootstrapConfiguration;
+import javax.validation.BootstrapConfiguration; */
+
 import javax.validation.Configuration;
 //import javax.validation.ParameterNameProvider;
 import javax.validation.Validation;
@@ -56,14 +56,18 @@ public class ValidationConfigurationContextResolver implements ContextResolver<G
     @Override
     public GeneralValidator getContext(Class<?> type) {
         Configuration<?> config = Validation.byDefaultProvider().configure();
+        
+        return new GeneralValidatorImpl(config.buildValidatorFactory(),true,null);
+        
+        /*
         BootstrapConfiguration bootstrapConfiguration = config.getBootstrapConfiguration();
 
         config.messageInterpolator(new LocaleSpecificMessageInterpolator(Validation.byDefaultProvider().configure().getDefaultMessageInterpolator()));
-        /*config.parameterNameProvider(new CustomParameterNameProvider());*/
+        config.parameterNameProvider(new CustomParameterNameProvider());
 
         return new GeneralValidatorImpl(config.buildValidatorFactory(),
         								bootstrapConfiguration.isExecutableValidationEnabled(),
-        								bootstrapConfiguration.getDefaultValidatedExecutableTypes());
+        								bootstrapConfiguration.getDefaultValidatedExecutableTypes()); */
     }
 
     /**

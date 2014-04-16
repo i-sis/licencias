@@ -18,15 +18,15 @@ package isis.licencias.service;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/*
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-
+*/
 import javax.validation.BootstrapConfiguration;
 import javax.validation.Configuration;
-import javax.validation.ParameterNameProvider;
+//import javax.validation.ParameterNameProvider;
 import javax.validation.Validation;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
@@ -59,7 +59,7 @@ public class ValidationConfigurationContextResolver implements ContextResolver<G
         BootstrapConfiguration bootstrapConfiguration = config.getBootstrapConfiguration();
 
         config.messageInterpolator(new LocaleSpecificMessageInterpolator(Validation.byDefaultProvider().configure().getDefaultMessageInterpolator()));
-        config.parameterNameProvider(new CustomParameterNameProvider());
+        /*config.parameterNameProvider(new CustomParameterNameProvider());*/
 
         return new GeneralValidatorImpl(config.buildValidatorFactory(),
         								bootstrapConfiguration.isExecutableValidationEnabled(),
@@ -69,7 +69,7 @@ public class ValidationConfigurationContextResolver implements ContextResolver<G
     /**
      * If method input parameters are invalid, this class returns actual parameter names instead of the default ones (
      * {@code arg0, arg1, ...})
-     */
+     
     private class CustomParameterNameProvider implements ParameterNameProvider {
 
         private final ParameterNameProvider nameProvider;
@@ -91,5 +91,5 @@ public class ValidationConfigurationContextResolver implements ContextResolver<G
             }
             return nameProvider.getParameterNames(method);
         }
-    }
+    }*/
 }

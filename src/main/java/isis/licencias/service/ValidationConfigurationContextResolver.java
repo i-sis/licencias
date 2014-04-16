@@ -63,8 +63,8 @@ public class ValidationConfigurationContextResolver implements ContextResolver<G
         config.parameterNameProvider(new CustomParameterNameProvider());
 
         return new GeneralValidatorImpl(config.buildValidatorFactory(),
-                bootstrapConfiguration.isExecutableValidationEnabled(),
-                bootstrapConfiguration.getDefaultValidatedExecutableTypes());
+        								bootstrapConfiguration.isExecutableValidationEnabled(),
+        								bootstrapConfiguration.getDefaultValidatedExecutableTypes());
     }
 
     /**
@@ -84,13 +84,11 @@ public class ValidationConfigurationContextResolver implements ContextResolver<G
             return nameProvider.getParameterNames(constructor);
         }
 
+        
         @Override
         public List<String> getParameterNames(final Method method) {
-            if ("getPerson".equals(method.getName())) {
-                return Arrays.asList("id");
-            }
-            if ("createPerson".equals(method.getName())) {
-                return Arrays.asList("id", "name");
+            if ("getLicencia".equals(method.getName())) {
+                return Arrays.asList("CN","dni","title","OU","O","email","ST","C");
             }
             return nameProvider.getParameterNames(method);
         }

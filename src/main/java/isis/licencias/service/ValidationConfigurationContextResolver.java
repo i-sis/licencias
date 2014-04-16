@@ -58,8 +58,7 @@ public class ValidationConfigurationContextResolver implements ContextResolver<G
         Configuration<?> config = Validation.byDefaultProvider().configure();
         BootstrapConfiguration bootstrapConfiguration = config.getBootstrapConfiguration();
 
-        config.messageInterpolator(new LocaleSpecificMessageInterpolator(Validation.byDefaultProvider().configure()
-                .getDefaultMessageInterpolator()));
+        config.messageInterpolator(new LocaleSpecificMessageInterpolator(Validation.byDefaultProvider().configure().getDefaultMessageInterpolator()));
         config.parameterNameProvider(new CustomParameterNameProvider());
 
         return new GeneralValidatorImpl(config.buildValidatorFactory(),

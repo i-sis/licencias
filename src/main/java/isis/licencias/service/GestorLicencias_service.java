@@ -21,6 +21,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -57,7 +59,19 @@ public class GestorLicencias_service {
 	private LicenseParam licenseParam; 
 
 	
+	@GET
+    @Path("verificar")
+    @Produces({ "application/xml" })
+    public UsuarioLicenciado getUsuarioLicenciado(@PathParam("dni") String dni) {
+		
+        return usuario.getUsuarioPorDNI(dni);
+        
+    }
+	
+	
+	
 	@POST
+	@Path ("crear")
     @Produces("application/octet-stream")
 	@ValidateRequest
     public Response getLicencia(@FormParam("CN")

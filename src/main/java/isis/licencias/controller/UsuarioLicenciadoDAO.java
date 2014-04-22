@@ -8,5 +8,6 @@ import isis.licencias.model.UsuarioLicenciado;;
  */
 @Local
 public interface UsuarioLicenciadoDAO  {
+	public UsuarioLicenciado getUsuarioPorDNI(String dni);
 	void createUsuario(UsuarioLicenciado usuario);
 }

@@ -63,9 +63,7 @@ public class GestorLicencias_service {
     @Path("verificar")
     @Produces({ "application/xml" })
     public UsuarioLicenciado getUsuarioLicenciado(@PathParam("dni") String dni) {
-		
         return usuario.getUsuarioPorDNI(dni);
-        
     }
 	
 	

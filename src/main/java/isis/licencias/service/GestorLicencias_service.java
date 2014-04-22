@@ -62,8 +62,8 @@ public class GestorLicencias_service {
 	@GET
     @Path("{dni}")
 	@Produces("text/*")
-    public UsuarioLicenciado getUsuarioLicenciado(@PathParam("dni") String dni) {
-        return usuario.getUsuarioPorDNI(dni);
+    public String getUsuarioLicenciado(@PathParam("dni") String dni) {
+        return usuario.getUsuarioPorDNI(dni).getName();
     }
 	
 	

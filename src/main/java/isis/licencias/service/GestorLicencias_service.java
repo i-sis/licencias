@@ -60,7 +60,7 @@ public class GestorLicencias_service {
 
 	
 	@GET
-    @Path("verificar")
+    @Path("/{dni}")
     @Produces({ "application/xml" })
     public UsuarioLicenciado getUsuarioLicenciado(@PathParam("dni") String dni) {
         return usuario.getUsuarioPorDNI(dni);
@@ -69,7 +69,6 @@ public class GestorLicencias_service {
 	
 	
 	@POST
-	@Path ("crear")
     @Produces("application/octet-stream")
 	@ValidateRequest
     public Response getLicencia(@FormParam("CN")

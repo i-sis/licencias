@@ -41,12 +41,9 @@ import de.schlichtherle.license.LicenseContent;
 import de.schlichtherle.license.LicenseManager;
 import de.schlichtherle.license.LicenseParam;
 
-
-
 @Path ("/")
 public class GestorLicencias_service {
-	
-	
+
 	@Inject
 	private Logger log;
 	
@@ -57,16 +54,18 @@ public class GestorLicencias_service {
 	private KeyStoreParam privateKeyStoreParam;
 	private CipherParam cipherParam;
 	private LicenseParam licenseParam; 
-
 	
 	@GET
     @Path("{dni}")
 	@Produces("text/*")
     public String getUsuarioLicenciado(@PathParam("dni") String dni) {
-        return usuario.getUsuarioPorDNI(dni).getName();
+		if (usuario.getUsuarioPorDNI(dni)!=null){
+			return usuario.getUsuarioPorDNI(dni).getName();
+		}
+		else {
+			return "No existe";
+		}
     }
-	
-	
 	
 	@POST
     @Produces("application/octet-stream")

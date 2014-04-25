@@ -26,8 +26,7 @@ public class UsuarioLicenciado implements Serializable {
 
 
     @NotNull
-    @Size (min = 1, max = 25)
-    @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
+    @Size (min = 1, max = 50)
     private String name;
     
     @Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
@@ -35,7 +34,7 @@ public class UsuarioLicenciado implements Serializable {
     @Column (name="dni")
     private String dni;
     
-    @Size (min = 1, max = 25)
+    @Size (min = 1, max = 40)
     @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
     private String title;
     

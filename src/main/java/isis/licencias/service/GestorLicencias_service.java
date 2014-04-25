@@ -196,7 +196,7 @@ public class GestorLicencias_service {
 			newUsuario.setEmail(email);
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
-			newUsuario.setTipo_Licencia(1); //1 - Licencia tipo DEMO
+			newUsuario.setTipo_Licencia(3); //3 - Licencia tipo FULL
 			
 			usuario.createUsuario(newUsuario);
 			
@@ -332,8 +332,9 @@ public class GestorLicencias_service {
 		       result.setInfo("Limita el número de usuarios que pueden utilizar esta aplicación");
 		       Date now = new Date();
 		       result.setIssued(now);
+		       /* Descomentar las siguientes líneas para fijar una licencia a término 
 		       now.setYear(now.getYear() + 1);
-		       result.setNotAfter(now);
+		       result.setNotAfter(now); */
 		       result.setSubject(licenseParam.getSubject());
 		       return result;
 		   }	   

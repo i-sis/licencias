@@ -53,11 +53,23 @@ public class GestorLicencias_service {
 	private UsuarioLicenciado newUsuario;
 	private KeyStoreParam privateKeyStoreParam;
 	private CipherParam cipherParam;
-	private LicenseParam licenseParam;
+	private LicenseParam licenseParam; 
+	
+	@GET
+    @Path("{dni}")
+	@Produces("text/*")
+    public String getUsuarioLicenciado(@PathParam("dni") String dni) {
+		if (usuario.getUsuarioPorDNI(dni)!=null){
+			return usuario.getUsuarioPorDNI(dni).getName();
+		}
+		else {
+			return "No existe";
+		}
+    }
 	
 	
 	@POST
-	@Path("DEMO")
+	@Path("{DEMO}")
     @Produces("application/octet-stream")
 	@ValidateRequest
     public Response getLicencia(@FormParam("CN")
@@ -146,18 +158,6 @@ public class GestorLicencias_service {
 			response = Response.status(Status.BAD_REQUEST).entity(ex.getMessage()); 
 			return response.build();
 		} 
-    }
-	
-	@GET
-    @Path("{dni}")
-	@Produces("text/*")
-    public String getUsuarioLicenciado(@PathParam("dni") String dni) {
-		if (usuario.getUsuarioPorDNI(dni)!=null){
-			return usuario.getUsuarioPorDNI(dni).getName();
-		}
-		else {
-			return "No existe";
-		}
     }
 	
 	

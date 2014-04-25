@@ -72,7 +72,7 @@ public class GestorLicencias_service {
 	@Path("tipo/DEMO")
     @Produces("application/octet-stream")
 	@ValidateRequest
-    public Response getLicencia(@FormParam("CN")
+    public Response getLicencia_DEMO(@FormParam("CN")
     							@NotNull
     							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letras y espacios")
     							String CN,
@@ -160,7 +160,98 @@ public class GestorLicencias_service {
 		} 
     }
 	
-	
+	@POST
+	@Path("tipo/FULL")
+    @Produces("application/octet-stream")
+	@ValidateRequest
+    public Response getLicencia_FULL(@FormParam("CN")
+    							@NotNull
+    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letras y espacios")
+    							String CN,
+			  					@FormParam("dni") 
+    							@NotNull
+    							@Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
+    							@Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
+    							String dni,
+			  					@FormParam("title") 
+    							@NotNull
+    							@Size (min = 1, max = 25)
+    							@Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
+    							String title, 
+			  					@FormParam("OU") String OU,
+			  					@FormParam("O") String O,
+			  					@FormParam("email") String email,
+			  					@FormParam("ST") String ST,
+			  					@FormParam("C") String C) {
+
+		ResponseBuilder response = null;
+		
+		try {
+			newUsuario = new UsuarioLicenciado();
+			newUsuario.setName(CN);
+			newUsuario.setDni(dni);
+			newUsuario.setTitle(title);
+			newUsuario.setOu(OU);
+			newUsuario.setOrganization(O);
+			newUsuario.setEmail(email);
+			newUsuario.setState(ST);
+			newUsuario.setCountry(C);
+			newUsuario.setTipo_Licencia(1); //1 - Licencia tipo DEMO
+			
+			usuario.createUsuario(newUsuario);
+			
+			/* Creo archivo temporal con la licencia */ 
+			File licencia_file = crearLicencia();
+			response = Response.ok((Object) licencia_file);
+			
+			/* Devuelvo un arreglo de bytes con el contenido del archivo Licencia al cliente */ 
+			if (licencia_file != null){
+		        response = Response.ok((Object) licencia_file);
+		        return response.build();
+		 	}
+			else {
+	            response = Response.status(Status.BAD_REQUEST);
+	            return response.build();
+			}
+		}
+		catch (RollbackException ex){
+			ex.printStackTrace();
+			System.out.println("ENCONTRE UNA ROLLBACKEXCEPTIONs");
+			System.out.println(ex.getMessage());
+			response = Response.status(Status.BAD_REQUEST);
+			return response.build();
+		}
+		
+		catch (ConstraintViolationException ex) {
+			System.out.println("NO, FUE POR AQUI");
+			ex.printStackTrace();
+			//Handle bean validation issues
+			response = Response.status(Status.BAD_REQUEST);
+			return response.build();
+		} 
+		catch (ValidationException ex) {
+			System.out.println("ENTRE POR AQUI");
+			ex.printStackTrace();
+			//Handle the unique constrain violation
+			Map<String, String> responseObj = new HashMap<String, String>();
+			responseObj.put("email","Email taken");
+			response = Response.status(Response.Status.CONFLICT).entity(responseObj);
+			return response.build();
+		}
+		catch (PersistenceException ex){
+			System.out.println("ENCONTRO UNA PERSISTENCE EXCEPTION");
+			ex.printStackTrace();
+			response = Response.status(Status.BAD_REQUEST);
+			return response.build();
+		}
+		catch (Exception ex){
+			System.out.println("ENCONTRE UNA EXCEPCION	");
+			ex.printStackTrace();
+			response = Response.status(Status.BAD_REQUEST).entity(ex.getMessage()); 
+			return response.build();
+		} 
+    }
+
 	private File crearLicencia() {
 		       
 		       /*Implemento la interface KeyStoreParam*/

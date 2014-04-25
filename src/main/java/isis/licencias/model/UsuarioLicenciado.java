@@ -70,9 +70,7 @@ public class UsuarioLicenciado implements Serializable {
     
     /* Tipos de licencia 1 - DEMO  2 - LITE 3- FULL*/
     @NotNull
-    @Size (min = 1, max = 3, message = "Debe una constante numérica del 1 al 3")
-    @Pattern (regexp = "1|2|3", message = "Debe contener sólo dos letras mayúsculas")
-    private int tipo_licencia;
+    private Integer tipo_licencia;
 
         
     public Long getId() {
@@ -147,11 +145,11 @@ public class UsuarioLicenciado implements Serializable {
         this.country = country;
     }
     
-    public int getTipo_Licencia() {
+    public Integer getTipo_Licencia() {
         return tipo_licencia;
     }
 
-    public void setTipo_Licencia(int tipo) {
+    public void setTipo_Licencia(Integer tipo) {
         this.tipo_licencia = tipo;
     }
 }

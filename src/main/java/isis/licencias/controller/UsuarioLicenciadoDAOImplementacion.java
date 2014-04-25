@@ -31,7 +31,7 @@ public class UsuarioLicenciadoDAOImplementacion implements UsuarioLicenciadoDAO 
 
     @Override
     public void createUsuario (UsuarioLicenciado usuario) {
-    	System.out.println("VOY A INTENTAR PERSISTIR");
+    	System.out.println("ESTOY PERSISTIENDO UN USUARIO");
    		em.persist(usuario);
     }
 }

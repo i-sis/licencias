@@ -68,6 +68,7 @@ public class GestorLicencias_service {
     }
 	
 	@POST
+	@Path("DEMO")
     @Produces("application/octet-stream")
 	@ValidateRequest
     public Response getLicencia(@FormParam("CN")
@@ -88,7 +89,7 @@ public class GestorLicencias_service {
 			  					@FormParam("O") String O,
 			  					@FormParam("email") String email,
 			  					@FormParam("ST") String ST,
-			  					@FormParam("C") String C)    {
+			  					@FormParam("C") String C) {
 
 		ResponseBuilder response = null;
 		
@@ -102,6 +103,7 @@ public class GestorLicencias_service {
 			newUsuario.setEmail(email);
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
+			newUsuario.setTipo_Licencia(1); //1 - Licencia tipo DEMO
 			
 			usuario.createUsuario(newUsuario);
 			

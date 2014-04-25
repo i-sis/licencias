@@ -26,6 +26,9 @@ public class UsuarioLicenciado implements Serializable {
     private Long id;
 
 
+    @NotNull
+    @Size (min = 1, max = 25)
+    @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
     private String name;
     
     @NotNull
@@ -64,7 +67,14 @@ public class UsuarioLicenciado implements Serializable {
     @Pattern (regexp = "[A-Z]*", message = "Debe contener sólo dos letras mayúsculas")
     private String country;
 
-       
+    
+    /* Tipos de licencia 1 - DEMO  2 - LITE 3- FULL*/
+    @NotNull
+    @Size (min = 1, max = 3, message = "Debe una constante numérica del 1 al 3")
+    @Pattern (regexp = "1|2|3", message = "Debe contener sólo dos letras mayúsculas")
+    private int tipo_licencia;
+
+        
     public Long getId() {
         return id;
     }
@@ -135,5 +145,13 @@ public class UsuarioLicenciado implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+    
+    public int getTipo_Licencia() {
+        return tipo_licencia;
+    }
+
+    public void setTipo_Licencia(int tipo) {
+        this.tipo_licencia = tipo;
     }
 }

@@ -18,7 +18,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "dni"))
 public class UsuarioLicenciado implements Serializable {
 
     @Id

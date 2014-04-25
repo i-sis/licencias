@@ -30,18 +30,15 @@ public class UsuarioLicenciado implements Serializable {
     @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
     private String name;
     
-    @NotNull
     @Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
     @Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
     @Column (name="dni")
     private String dni;
     
-    @NotNull
     @Size (min = 1, max = 25)
     @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
     private String title;
     
-    @NotNull
     @Size(min = 1, max = 40)
     @Pattern(regexp="[A-Za-z0-9 ]*", message = "Debe contener letras o números y espacios")
     private String ou;
@@ -56,12 +53,10 @@ public class UsuarioLicenciado implements Serializable {
     @Email (message= "Debe colocar una dirección de email bien formada")
     private String email;
 
-    @NotNull
     @Size (min = 1, max = 20)
     @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras o espacios")
     private String state;
     
-    @NotNull
     @Size (min = 1, max = 2, message = "Debe contener sólo dos letras mayúsculas")
     @Pattern (regexp = "[A-Z]*", message = "Debe contener sólo dos letras mayúsculas")
     private String country;

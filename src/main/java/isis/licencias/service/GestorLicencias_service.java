@@ -69,7 +69,7 @@ public class GestorLicencias_service {
 	
 	
 	@POST
-	@Path("{DEMO}")
+	@Path("tipo/DEMO")
     @Produces("application/octet-stream")
 	@ValidateRequest
     public Response getLicencia(@FormParam("CN")

@@ -29,22 +29,22 @@ public class UsuarioLicenciado implements Serializable {
     @Size (min = 1, max = 50)
     private String name;
     
-    @Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
-    @Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
+    //@Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
+    //@Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
     @Column (name="dni")
     private String dni;
     
-    @Size (min = 1, max = 40)
-    @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
+    //@Size (min = 1, max = 40)
+    //@Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
     private String title;
     
-    @Size(min = 1, max = 40)
-    @Pattern(regexp="[A-Za-z0-9 ]*", message = "Debe contener letras o números y espacios")
+    //@Size(min = 1, max = 40)
+    //@Pattern(regexp="[A-Za-z0-9 ]*", message = "Debe contener letras o números y espacios")
     private String ou;
     
     @NotNull
-    @Size (min = 1, max = 40)
-    @Pattern (regexp = "[A-Za-z0-9 ]*", message = "Debe contener letras o números y espacios")
+    //@Size (min = 1, max = 40)
+    //@Pattern (regexp = "[A-Za-z0-9 ]*", message = "Debe contener letras o números y espacios")
     private String organization;
 
     @NotNull
@@ -52,8 +52,8 @@ public class UsuarioLicenciado implements Serializable {
     @Email (message= "Debe colocar una dirección de email bien formada")
     private String email;
 
-    @Size (min = 1, max = 20)
-    @Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras o espacios")
+    //@Size (min = 1, max = 20)
+    //@Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras o espacios")
     private String state;
     
     @Size (min = 1, max = 2, message = "Debe contener sólo dos letras mayúsculas")

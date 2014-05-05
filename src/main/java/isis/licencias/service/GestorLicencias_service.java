@@ -166,18 +166,13 @@ public class GestorLicencias_service {
 	@ValidateRequest
     public Response getLicencia_FULL(@FormParam("CN")
     							@NotNull
-    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letras y espacios")
+    							@Pattern(regexp = "([A-Z|Ñ][a-z|á|é|í|ó|ú|ñ]+\b([A-Z|Ñ](.|[a-z|á|é|í|ó|ú|ñ]+)\b)*[A-Z|Ñ][a-z|á|é|í|ó|ú|ñ]+)${5}{50}", message = "debe contener sólo letras y espacios")
     							String CN,
 			  					@FormParam("dni") 
     							@NotNull
-    							@Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
-    							@Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
+    							@Pattern(regexp = "[DU]\b\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
     							String dni,
-			  					@FormParam("title") 
-    							@NotNull
-    							@Size (min = 1, max = 25)
-    							@Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
-    							String title, 
+			  					@FormParam("title") String title, 
 			  					@FormParam("OU") String OU,
 			  					@FormParam("O") String O,
 			  					@FormParam("email") String email,

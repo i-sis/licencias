@@ -170,7 +170,7 @@ public class GestorLicencias_service {
     							String CN,
 			  					@FormParam("dni") 
     							@NotNull
-    							@Pattern(regexp = "[DU|]\b\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
+    							@Pattern(regexp = "[DU\b]\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
     							String dni,
 			  					@FormParam("title") String title, 
 			  					@FormParam("OU") String OU,

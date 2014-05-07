@@ -30,6 +30,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.jboss.resteasy.spi.validation.ValidateRequest;
 
 import isis.licencias.controller.UsuarioLicenciadoDAO;
@@ -166,18 +168,34 @@ public class GestorLicencias_service {
 	@ValidateRequest
     public Response getLicencia_FULL(@FormParam("CN")
     							@NotNull
-    							@Pattern(regexp = "([A-Z|Ñ][a-z|á|é|í|ó|ú|ñ]+\b([A-Z|Ñ](.|[a-z|á|é|í|ó|ú|ñ]+)\b)*[A-Z|Ñ][a-z|á|é|í|ó|ú|ñ]+)${5}{50}", message = "debe contener sólo letras y espacios")
+    							@Pattern(regexp = "[A-Za-zñáéíóúÑÁÉÍÓÚ\\s]{2,50}$", message = "debe contener sólo letras y espacios")
     							String CN,
+    							
 			  					@FormParam("dni") 
     							@NotNull
-    							@Pattern(regexp = "[DU\b]\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
+    							@Pattern(regexp ="(DU\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
     							String dni,
+    							
 			  					@FormParam("title") String title, 
 			  					@FormParam("OU") String OU,
-			  					@FormParam("O") String O,
-			  					@FormParam("email") String email,
+			  					
+			  					@FormParam("O") 
+    							@NotNull
+    							@Pattern(regexp = "[A-Za-zñáéíóúÑ.&-_0-9\\s]{2,50}$", message = "debe contener sólo letras y espacios")
+    							String O,
+			  					
+    							@FormParam("email")
+    							@NotNull
+    							@NotEmpty
+    							@Email (message= "Debe colocar una dirección de email bien formada")
+    							String email,
+    							
 			  					@FormParam("ST") String ST,
-			  					@FormParam("C") String C) {
+			  					
+			  					@FormParam("C")
+    							@NotNull
+    							@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
+    							String C) {
 
 		ResponseBuilder response = null;
 		

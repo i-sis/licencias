@@ -12,6 +12,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.ws.rs.FormParam;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -24,27 +25,24 @@ public class UsuarioLicenciado implements Serializable {
     @GeneratedValue
     private Long id;
 
-
-    @NotNull
-    @Size (min = 1, max = 50)
+	@NotNull
+	@Pattern(regexp = "[A-Za-zñáéíóúÑÁÉÍÓÚ\\s]{2,50}$", message = "debe contener sólo letras y espacios")
+    @Size (min = 5, max = 50)
     private String name;
-    
-    //@Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
-    //@Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
+
+	@NotNull
+	@Pattern(regexp ="(DU\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
+	@Size (min = 1, max = 50, message = "debe ser un número de entre 1 y 50 dígitos")
     @Column (name="dni")
     private String dni;
     
-    //@Size (min = 1, max = 40)
-    //@Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
     private String title;
     
-    //@Size(min = 1, max = 40)
-    //@Pattern(regexp="[A-Za-z0-9 ]*", message = "Debe contener letras o números y espacios")
     private String ou;
     
-    @NotNull
-    //@Size (min = 1, max = 40)
-    //@Pattern (regexp = "[A-Za-z0-9 ]*", message = "Debe contener letras o números y espacios")
+	@NotNull
+	@Pattern(regexp = "[A-Za-zñáéíóúÑ.&-_0-9\\s]{2,50}$", message = "debe contener sólo letras y espacios")
+	@Size (min = 5, max = 50)
     private String organization;
 
     @NotNull
@@ -52,12 +50,10 @@ public class UsuarioLicenciado implements Serializable {
     @Email (message= "Debe colocar una dirección de email bien formada")
     private String email;
 
-    //@Size (min = 1, max = 20)
-    //@Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras o espacios")
     private String state;
     
-    @Size (min = 1, max = 2, message = "Debe contener sólo dos letras mayúsculas")
-    @Pattern (regexp = "[A-Z]*", message = "Debe contener sólo dos letras mayúsculas")
+	@NotNull
+	@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
     private String country;
 
     

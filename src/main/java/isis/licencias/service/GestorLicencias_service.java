@@ -111,7 +111,7 @@ public class GestorLicencias_service {
 			usuario.createUsuario(newUsuario);
 			
 			/* Creo archivo temporal con la licencia */ 
-			File licencia_file = crearLicencia();
+			File licencia_file = crearLicencia("Firmador Digital v2.0 - DEMO");
 			response = Response.ok((Object) licencia_file);
 			
 			/* Devuelvo un arreglo de bytes con el contenido del archivo Licencia al cliente */ 
@@ -126,21 +126,17 @@ public class GestorLicencias_service {
 		}
 		catch (RollbackException ex){
 			ex.printStackTrace();
-			System.out.println("ENCONTRE UNA ROLLBACKEXCEPTIONs");
-			System.out.println(ex.getMessage());
 			response = Response.status(Status.BAD_REQUEST);
 			return response.build();
 		}
 		
 		catch (ConstraintViolationException ex) {
-			System.out.println("NO, FUE POR AQUI");
 			ex.printStackTrace();
 			//Handle bean validation issues
 			response = Response.status(Status.BAD_REQUEST);
 			return response.build();
 		} 
 		catch (ValidationException ex) {
-			System.out.println("ENTRE POR AQUI");
 			ex.printStackTrace();
 			//Handle the unique constrain violation
 			Map<String, String> responseObj = new HashMap<String, String>();
@@ -149,13 +145,11 @@ public class GestorLicencias_service {
 			return response.build();
 		}
 		catch (PersistenceException ex){
-			System.out.println("ENCONTRO UNA PERSISTENCE EXCEPTION");
 			ex.printStackTrace();
 			response = Response.status(Status.BAD_REQUEST);
 			return response.build();
 		}
 		catch (Exception ex){
-			System.out.println("ENCONTRE UNA EXCEPCION	");
 			ex.printStackTrace();
 			response = Response.status(Status.BAD_REQUEST).entity(ex.getMessage()); 
 			return response.build();
@@ -214,7 +208,7 @@ public class GestorLicencias_service {
 			usuario.createUsuario(newUsuario);
 			
 			/* Creo archivo temporal con la licencia */ 
-			File licencia_file = crearLicencia();
+			File licencia_file = crearLicencia("Firmador Digital v2.0 - FULL");
 			response = Response.ok((Object) licencia_file);
 			
 			/* Devuelvo un arreglo de bytes con el contenido del archivo Licencia al cliente */ 
@@ -229,21 +223,17 @@ public class GestorLicencias_service {
 		}
 		catch (RollbackException ex){
 			ex.printStackTrace();
-			System.out.println("ENCONTRE UNA ROLLBACKEXCEPTIONs");
-			System.out.println(ex.getMessage());
 			response = Response.status(Status.BAD_REQUEST);
 			return response.build();
 		}
 		
 		catch (ConstraintViolationException ex) {
-			System.out.println("NO, FUE POR AQUI");
 			ex.printStackTrace();
 			//Handle bean validation issues
 			response = Response.status(Status.BAD_REQUEST);
 			return response.build();
 		} 
 		catch (ValidationException ex) {
-			System.out.println("ENTRE POR AQUI");
 			ex.printStackTrace();
 			//Handle the unique constrain violation
 			Map<String, String> responseObj = new HashMap<String, String>();
@@ -252,103 +242,102 @@ public class GestorLicencias_service {
 			return response.build();
 		}
 		catch (PersistenceException ex){
-			System.out.println("ENCONTRO UNA PERSISTENCE EXCEPTION");
 			ex.printStackTrace();
 			response = Response.status(Status.BAD_REQUEST);
 			return response.build();
 		}
 		catch (Exception ex){
-			System.out.println("ENCONTRE UNA EXCEPCION	");
 			ex.printStackTrace();
 			response = Response.status(Status.BAD_REQUEST).entity(ex.getMessage()); 
 			return response.build();
 		} 
     }
 
-	private File crearLicencia() {
+	private File crearLicencia(final String version) {
 		       
-		       /*Implemento la interface KeyStoreParam*/
-		   	   privateKeyStoreParam = new KeyStoreParam() {
-		           public InputStream getStream() throws IOException {
-		        	   final String resourceName = "/privateKeys.store";
-		               final InputStream in = getClass().getResourceAsStream(resourceName);
-		               
-		               if (in == null)
-		                   throw new FileNotFoundException(resourceName);
-		               return in;
-		       }
+		/*Implemento la interface KeyStoreParam*/
+		privateKeyStoreParam = new KeyStoreParam() {
+			public InputStream getStream() throws IOException {
+		        final String resourceName = "/privateKeys.store";
+		         final InputStream in = getClass().getResourceAsStream(resourceName);
+		         if (in == null) throw new FileNotFoundException(resourceName);
+		         return in;
+		    }
 		       
-		       public String getAlias() {
-		               return "privatekey";
-		       }
+		    public String getAlias() {
+		    	return "privatekey";
+		    }
 		       
-		       public String getStorePwd() {
-		               return "1q2w3e4r";
-		       }
-		       public String getKeyPwd() {
-		               return "1q2w3e4r";
-		       }
-		   };
-
-
-		   /* Implemento la interface CipherParam */
-		   cipherParam = new CipherParam() {
-		       public String getKeyPwd() {
-		           return "1q2w3e4r";
-		       }
-		   };
-		       
-		       
-		   /* Implemento la interface LicenseParam */
-		   licenseParam = new LicenseParam() {
-		   		public String getSubject() {
-		               return "Firmador Digital v2.0";
-		           }
-		        public KeyStoreParam getKeyStoreParam() {
-		                return privateKeyStoreParam;
-		           }
+		    public String getStorePwd() {
+		        return "1q2w3e4r";
+		    }
 		           
-		        public CipherParam getCipherParam() {
-		                return cipherParam;
-		           }
-				@Override
-				public Preferences getPreferences() {
-					// TODO Auto-generated method stub
-					return null;
-				}
-		       };    
+		    public String getKeyPwd() {
+		        return "1q2w3e4r";
+		    }
+		};
+
+
+		/* Implemento la interface CipherParam */
+		cipherParam = new CipherParam() {
+			public String getKeyPwd() {
+		   	   return "1q2w3e4r";
+		   	}
+		};
 		       
-		       /* Creo el archivo con la licencia */
-		       File file=null;
-		       try {
-		    	   file = File.createTempFile("lic", ".tmp");
-		    	   LicenseManager lm = new LicenseManager(licenseParam);
-		           lm.store(createLicenseContent(), file);
-		       } catch (Exception f) {
-		           f.printStackTrace();
-		       }
+		       
+		/* Implemento la interface LicenseParam */
+		licenseParam = new LicenseParam() {
+		   	public String getSubject() {
+		        return version;
+		   	}
+		   	
+		    public KeyStoreParam getKeyStoreParam() {
+		         return privateKeyStoreParam;
+		    }
+		           
+		    public CipherParam getCipherParam() {
+		         return cipherParam;
+		    }
 		    
-		       return file;
-	  	   }
+		    @Override
+		    public Preferences getPreferences() {
+		    	// TODO Auto-generated method stub
+				return null;
+			}
+		 };    
+		       
+		 /* Creo el archivo con la licencia */
+		 File file=null;
+		 try {
+		   	   file = File.createTempFile("lic", ".tmp");
+		   	   LicenseManager lm = new LicenseManager(licenseParam);
+		       lm.store(createLicenseContent(), file);
+		 } 
+		 catch (Exception f) {
+		     f.printStackTrace();
+		 }
+		 
+		 return file;
+	}
 		   
-		   public LicenseContent createLicenseContent() {
-		       LicenseContent result = new LicenseContent();
-		       X500Principal holder = new X500Principal("CN=" + newUsuario.getName() + "UID="+newUsuario.getDni());
-		       result.setHolder(holder);
-		       X500Principal issuer = new X500Principal(
-		           "CN=isis Consultores, L=Mendoza, O=isis Consultores,"
-		         +" C=Argentina,"
-		         +" DC=AR");
-		       result.setIssuer(issuer);
-		       result.setConsumerAmount(1);
-		       result.setConsumerType("User");
-		       result.setInfo("Limita el número de usuarios que pueden utilizar esta aplicación");
-		       Date now = new Date();
-		       result.setIssued(now);
-		       /* Descomentar las siguientes líneas para fijar una licencia a término 
-		       now.setYear(now.getYear() + 1);
-		       result.setNotAfter(now); */
-		       result.setSubject(licenseParam.getSubject());
-		       return result;
-		   }	   
+	public LicenseContent createLicenseContent() {
+		 LicenseContent result = new LicenseContent();
+		 X500Principal holder = new X500Principal("CN=" + newUsuario.getName() + ", SERIALNUMBER="+newUsuario.getDni());
+		 result.setHolder(holder);
+		 X500Principal issuer = new X500Principal("CN=ISIS Consultores, L=Mendoza, O=ISIS Consultores,"
+		         								+" C=Argentina,"
+		         								+" DC=AR");
+		 result.setIssuer(issuer);
+		 result.setConsumerAmount(1);
+		 result.setConsumerType("User");
+		 result.setInfo("Limita el número de usuarios/firmantes que pueden utilizar esta aplicación");
+		 Date now = new Date();
+		 result.setIssued(now);
+		  /* Descomentar las siguientes líneas para fijar una licencia a término 
+		 now.setYear(now.getYear() + 1);
+		 result.setNotAfter(now); */
+		 result.setSubject(licenseParam.getSubject());
+		 return result;
+	}	   
 }

@@ -337,6 +337,7 @@ public class GestorLicencias_service {
 		  /* Descomentar las siguientes líneas para fijar una licencia a término 
 		 now.setYear(now.getYear() + 1);
 		 result.setNotAfter(now); */
+		 System.out.println("SUBJECT: " + licenseParam.getSubject() );
 		 result.setSubject(licenseParam.getSubject());
 		 return result;
 	}	   

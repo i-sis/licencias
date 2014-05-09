@@ -111,7 +111,7 @@ public class GestorLicencias_service {
 			usuario.createUsuario(newUsuario);
 			
 			/* Creo archivo temporal con la licencia */ 
-			File licencia_file = crearLicencia("Firmador Digital v2 - DEMO");
+			File licencia_file = crearLicencia("Firmador Digital v2.0 DEMO");
 			response = Response.ok((Object) licencia_file);
 			
 			/* Devuelvo un arreglo de bytes con el contenido del archivo Licencia al cliente */ 
@@ -208,7 +208,7 @@ public class GestorLicencias_service {
 			usuario.createUsuario(newUsuario);
 			
 			/* Creo archivo temporal con la licencia */ 
-			File licencia_file = crearLicencia("Firmador Digital v2.0 - FULL");
+			File licencia_file = crearLicencia("Firmador Digital v2.0 FULL");
 			response = Response.ok((Object) licencia_file);
 			
 			/* Devuelvo un arreglo de bytes con el contenido del archivo Licencia al cliente */ 
@@ -289,7 +289,7 @@ public class GestorLicencias_service {
 		/* Implemento la interface LicenseParam */
 		licenseParam = new LicenseParam() {
 		   	public String getSubject() {
-		        return "Firmador Digital v2.0 - FULL";
+		        return version;
 		   	}
 		   	
 		    public KeyStoreParam getKeyStoreParam() {

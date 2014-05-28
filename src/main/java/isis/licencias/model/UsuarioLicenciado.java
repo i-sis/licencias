@@ -31,7 +31,6 @@ public class UsuarioLicenciado implements Serializable {
     private String name;
 
 	@Pattern(regexp ="(DU\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
-	@Size (min = 2, max = 50, message = "debe ser un número de entre 1 y 50 dígitos")
     @Column (name="dni")
     private String dni;
     

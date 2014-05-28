@@ -75,24 +75,33 @@ public class GestorLicencias_service {
     @Produces("application/octet-stream")
 	@ValidateRequest
     public Response getLicencia_DEMO(@FormParam("CN")
-    							@NotNull
-    							@Pattern(regexp = "[A-Za-z ]*", message = "debe contener sólo letras y espacios")
-    							String CN,
-			  					@FormParam("dni") 
-    							@NotNull
-    							@Size (min = 8, max = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
-    							@Digits (fraction = 0, integer = 12, message = "Debe ser un número de entre 8 y 12 dígitos")
-    							String dni,
-			  					@FormParam("title") 
-    							@NotNull
-    							@Size (min = 1, max = 25)
-    							@Pattern (regexp = "[A-Za-z ]*", message = "Debe contener sólo letras y espacios")
-    							String title, 
-			  					@FormParam("OU") String OU,
-			  					@FormParam("O") String O,
-			  					@FormParam("email") String email,
-			  					@FormParam("ST") String ST,
-			  					@FormParam("C") String C) {
+    								 @NotNull
+    								 @Pattern(regexp = "[A-Za-zñáéíóúÑÁÉÍÓÚ\\s]{2,50}$", message = "debe contener sólo letras y espacios")
+									 String CN,
+	
+									 @FormParam("dni") 
+    								 @Pattern(regexp ="(DU\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
+									 String dni,
+	
+									 @FormParam("title") String title, 
+									 @FormParam("OU") String OU,
+		
+									 @FormParam("O") 
+									 @NotNull
+									 @Pattern(regexp = "[A-Za-zñáéíóúÑ.&-_0-9\\s]{2,50}$", message = "debe contener sólo letras y espacios")
+									 String O,
+		
+									 @FormParam("email")
+									 @NotNull
+									 @NotEmpty
+									 @Email (message= "Debe colocar una dirección de email bien formada")
+									 String email,
+	
+									 @FormParam("ST") String ST,
+		
+									 @FormParam("C")
+									 @Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
+									 String C) {
 
 		ResponseBuilder response = null;
 		

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +17,8 @@ import javax.persistence.RollbackException;
 import javax.security.auth.x500.X500Principal;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.GET;
@@ -116,6 +115,7 @@ public class GestorLicencias_service {
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
 			newUsuario.setTipo_Licencia(1); //1 - Licencia tipo DEMO
+			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 			
 			usuario.createUsuario(newUsuario);
 			
@@ -213,6 +213,7 @@ public class GestorLicencias_service {
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
 			newUsuario.setTipo_Licencia(3); //3 - Licencia tipo FULL
+			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 			
 			usuario.createUsuario(newUsuario);
 			

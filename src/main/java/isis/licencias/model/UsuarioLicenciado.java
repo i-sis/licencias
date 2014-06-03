@@ -1,18 +1,15 @@
 package isis.licencias.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.ws.rs.FormParam;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -57,6 +54,9 @@ public class UsuarioLicenciado implements Serializable {
     /* Tipos de licencia 1 - DEMO  2 - LITE 3- FULL*/
     @NotNull
     private Integer tipo_licencia;
+    
+    @NotNull
+    private Date fecha;
 
         
     public Long getId() {
@@ -137,5 +137,13 @@ public class UsuarioLicenciado implements Serializable {
 
     public void setTipo_Licencia(Integer tipo) {
         this.tipo_licencia = tipo;
+    }
+    
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha_registroLicencia) {
+    	this.fecha = fecha_registroLicencia;
     }
 }

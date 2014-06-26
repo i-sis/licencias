@@ -3,10 +3,10 @@ package isis.licencias.model;
 import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
+@Table
 public class UsuarioLicenciado implements Serializable {
 
     @Id
@@ -28,7 +29,6 @@ public class UsuarioLicenciado implements Serializable {
     private String name;
 
 	@Pattern(regexp ="(DU\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
-    @Column (name="dni")
     private String dni;
     
     private String title;

@@ -10,7 +10,7 @@ import isis.licencias.model.UsuarioLicenciado;;
 
 
 /**
- * Provee funcionalidades para la manipulación de Members usando el contexto de persistencia desde {@link Resources}.
+ * Provee funcionalidades para la manipulación de Usuarios usando el contexto de persistencia desde {@link Resources}.
  */
 @Stateful
 public class UsuarioLicenciadoDAOImplementacion implements UsuarioLicenciadoDAO {

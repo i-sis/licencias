@@ -87,7 +87,7 @@ public class GestorLicencias_service {
 		
 									 @FormParam("O") 
 									 @NotNull
-									 @Pattern(regexp = "[A-Za-z0-9ñáéíóúÑÁÉÍÓÚ_&#%+¿?¡!\\s\\.\\-\\*]{1,255}$", message = "debe contener sólo letras, numeros y espacios")
+									 @Pattern(regexp = "[A-Za-z0-9ñáéíóúÑÁÉÍÓÚ_&#%+\\¿\\?\\¡\\!\\s\\.\\-\\*]{1,255}$", message = "debe contener sólo letras, numeros y espacios")
 									 String O,
 		
 									 @FormParam("email")

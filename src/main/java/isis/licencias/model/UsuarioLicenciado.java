@@ -35,7 +35,7 @@ public class UsuarioLicenciado implements Serializable {
     private String ou;
     
 	@NotNull
-	@Pattern(regexp = "[A-Za-z0-9ñáéíóúÑÁÉÍÓÚ_&#%\\¡\\!\\¿\\?\\s\\.\\-\\+\\*]{1,255}$", message = "debe contener sólo letras y espacios")
+	@Pattern(regexp = "[A-Za-z0-9ñáéíóúÑÁÉÍÓÚ_&#%+¿?¡!\\s\\.\\-\\*]{1,255}$", message = "debe contener sólo letras y espacios")
 	@Size (min = 1, max = 255)
     private String organization;
 

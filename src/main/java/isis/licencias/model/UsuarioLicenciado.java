@@ -25,7 +25,6 @@ public class UsuarioLicenciado implements Serializable {
 
 	@NotNull
 	@Pattern(regexp = "[A-Za-zñáéíóúÑÁÉÍÓÚ\\s]{2,50}$", message = "debe contener sólo letras y espacios")
-    @Size (min = 5, max = 50)
     private String name;
 
 	@Pattern(regexp ="(DU\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
@@ -37,7 +36,7 @@ public class UsuarioLicenciado implements Serializable {
     
 	@NotNull
 	@Pattern(regexp = "[A-Za-zñáéíóúÑ&#?¿!_0-9\\s\\.\\-\\*]{1,255}$", message = "debe contener sólo letras y espacios")
-	@Size (min = 1, max = 50)
+	@Size (min = 1, max = 255)
     private String organization;
 
     @NotNull

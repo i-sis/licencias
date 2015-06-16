@@ -79,15 +79,13 @@ public class GestorLicencias_service {
 									 String CN,
 	
 									 @FormParam("dni") 
-    								 @Pattern(regexp ="(DU\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
+    								 @Pattern(regexp ="((DU|CUIT|CUIL)\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos o a la cadena CUIT o CUIL y 13 dígitos")
 									 String dni,
 	
 									 @FormParam("title") String title, 
 									 @FormParam("OU") String OU,
 		
 									 @FormParam("O") 
-									 @NotNull
-									 @NotEmpty
 									 String O,
 		
 									 @FormParam("email")
@@ -176,14 +174,13 @@ public class GestorLicencias_service {
     							
 			  					@FormParam("dni") 
     							@NotNull
-    							@Pattern(regexp ="(DU\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")
+    							@Pattern(regexp ="((DU|CUIT|CUIL)\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos o a la cadena CUIL o CUIT Y 11 dígitos")
     							String dni,
     							
 			  					@FormParam("title") String title, 
 			  					@FormParam("OU") String OU,
 			  					
 			  					@FormParam("O") 
-    							@NotNull
     							@Pattern(regexp = "[A-Za-zñáéíóúÑ.&-_0-9\\s]{2,50}$", message = "debe contener sólo letras y espacios")
     							String O,
 			  					
@@ -196,7 +193,6 @@ public class GestorLicencias_service {
 			  					@FormParam("ST") String ST,
 			  					
 			  					@FormParam("C")
-    							@NotNull
     							@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
     							String C) {
 

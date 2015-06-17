@@ -329,7 +329,7 @@ public class GestorLicencias_service {
 		   
 	public LicenseContent createLicenseContent() {
 		 LicenseContent result = new LicenseContent();
-		 X500Principal holder = new X500Principal("CN=" + newUsuario.getName() + ", UID="+newUsuario.getDni());
+		 X500Principal holder = new X500Principal("CN=" + newUsuario.getName() + ", UID="+newUsuario.getDni() + ", O="+newUsuario.getOrganization());
 		 result.setHolder(holder);
 		 X500Principal issuer = new X500Principal("CN=ISIS Consultores, L=Mendoza, O=ISIS Consultores,"
 		         								+" C=Argentina,"

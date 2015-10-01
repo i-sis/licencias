@@ -165,7 +165,7 @@ public class GestorLicencias_service {
 	
 	@POST
 	@Path("tipo/FULL")
-    @Produces("text/*")
+    @Produces("application/octet-stream")
 	@ValidateRequest
     public Response getLicencia_FULL(@FormParam("CN")
     							@NotNull

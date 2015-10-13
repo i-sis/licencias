@@ -75,7 +75,7 @@ public class GestorLicencias_service {
 	@ValidateRequest
     public Response getLicencia_DEMO(@FormParam("CN")
     								 @NotNull
-    								 @Pattern(regexp = "[A-Za-zñáéíóúÑÁÉÍÓÚ\\s]{2,50}$", message = "debe contener sólo letras y espacios")
+    								 @Pattern(regexp = "[A-Za-z'&ntilde''&iacute';\\s]{2,50}$", message = "debe contener sólo letras y espacios")
 									 String CN,
 	
 									 @FormParam("dni") 
@@ -165,7 +165,7 @@ public class GestorLicencias_service {
 	
 	@POST
 	@Path("tipo/FULL")
-	@Produces("text/*")
+    @Produces("application/octet-stream")
 	@ValidateRequest
     public Response getLicencia_FULL(@FormParam("CN")
     							@NotNull

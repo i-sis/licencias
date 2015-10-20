@@ -75,8 +75,7 @@ public class GestorLicencias_service {
 	@ValidateRequest
     public Response getLicencia_DEMO(@FormParam("CN")
     								 @NotNull
-    								 @Pattern(regexp = "[A-Za-z'&ntilde''&iacute';\\s]{2,50}$", message = "debe contener sólo letras y espacios")
-									 String CN,
+    								 String CN,
 	
 									 @FormParam("dni") 
     								 @Pattern(regexp ="((DU|CUIT|CUIL)\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos o a la cadena CUIT o CUIL y 13 dígitos")
@@ -169,8 +168,8 @@ public class GestorLicencias_service {
 	@ValidateRequest
     public Response getLicencia_FULL(@FormParam("CN")
     							@NotNull
+
     							String CN,
-    							
 			  					@FormParam("dni") 
     							@NotNull
     							@Pattern(regexp ="((DU|CUIT|CUIL)\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos o a la cadena CUIL o CUIT Y 11 dígitos")

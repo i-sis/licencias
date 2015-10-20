@@ -24,7 +24,6 @@ public class UsuarioLicenciado implements Serializable {
     private Long id;
 
 	@NotNull
-	@Pattern(regexp = "[A-Za-zñáéíóúÑÁÉÍÓÚ\\s]{2,50}$", message = "debe contener sólo letras y espacios")
     private String name;
 
 	@Pattern(regexp ="((DU|CUIT|CUIL)\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos")

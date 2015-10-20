@@ -168,8 +168,8 @@ public class GestorLicencias_service {
 	@ValidateRequest
     public Response getLicencia_FULL(@FormParam("CN")
     							@NotNull
-
     							String CN,
+    							
 			  					@FormParam("dni") 
     							@NotNull
     							@Pattern(regexp ="((DU|CUIT|CUIL)\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos o a la cadena CUIL o CUIT Y 11 dígitos")

@@ -435,9 +435,9 @@ public class GestorLicencias_service {
 		 result.setInfo("Limita el número de usuarios/firmantes que pueden utilizar esta aplicación");
 		 Date now = new Date();
 		 result.setIssued(now);
-		  /* Descomentar las siguientes líneas para fijar una licencia a término 
+		  /* Descomentar las siguientes líneas para fijar una licencia a término */ 
 		 now.setYear(now.getYear() + 1);
-		 result.setNotAfter(now); */
+		 result.setNotAfter(now); 
 		 System.out.println("SUBJECT: " + licenseParam.getSubject() );
 		 result.setSubject(licenseParam.getSubject());
 		 return result;

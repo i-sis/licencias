@@ -257,6 +257,103 @@ public class GestorLicencias_service {
 		} 
     }
 
+	
+	@POST
+	@Path("tipo/BASE")
+    @Produces("application/octet-stream")
+	@ValidateRequest
+    public Response getLicencia_BASE(@FormParam("CN")
+    							@NotNull
+    							String CN,
+    							
+			  					@FormParam("dni") 
+    							@NotNull
+    							@Pattern(regexp ="((DU|CUIT|CUIL)\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos o a la cadena CUIL o CUIT Y 11 dígitos")
+    							String dni,
+    							
+			  					@FormParam("title") String title, 
+			  					@FormParam("OU") String OU,
+			  					
+			  					@FormParam("O") 
+    							@Pattern(regexp = "[A-Za-zñáéíóúÑ.&-_0-9\\s]{2,50}$", message = "debe contener sólo letras y espacios")
+    							String O,
+			  					
+    							@FormParam("email")
+    							@NotNull
+    							@NotEmpty
+    							@Email (message= "Debe colocar una dirección de email bien formada")
+    							String email,
+    							
+			  					@FormParam("ST") String ST,
+			  					
+			  					@FormParam("C")
+    							@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
+    							String C) {
+
+		ResponseBuilder response = null;
+		
+		try {
+			newUsuario = new UsuarioLicenciado();
+			newUsuario.setName(CN);
+			newUsuario.setDni(dni);
+			newUsuario.setTitle(title);
+			newUsuario.setOu(OU);
+			newUsuario.setOrganization(O);
+			newUsuario.setEmail(email);
+			newUsuario.setState(ST);
+			newUsuario.setCountry(C);
+			newUsuario.setTipo_Licencia(2); //2 - Licencia tipo BASE
+			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+			
+			usuario.createUsuario(newUsuario);
+			
+			/* Creo archivo temporal con la licencia */ 
+			File licencia_file = crearLicencia("Firmador Digital v2.0 - BASE");
+			response = Response.ok((Object) licencia_file);
+			
+			/* Devuelvo un arreglo de bytes con el contenido del archivo Licencia al cliente */ 
+			if (licencia_file != null){
+		        response = Response.ok((Object) licencia_file);
+		        return response.build();
+		 	}
+			else {
+	            response = Response.status(Status.BAD_REQUEST);
+	            return response.build();
+			}
+		}
+		catch (RollbackException ex){
+			ex.printStackTrace();
+			response = Response.status(Status.BAD_REQUEST);
+			return response.build();
+		}
+		
+		catch (ConstraintViolationException ex) {
+			ex.printStackTrace();
+			//Handle bean validation issues
+			response = Response.status(Status.BAD_REQUEST);
+			return response.build();
+		} 
+		catch (ValidationException ex) {
+			ex.printStackTrace();
+			//Handle the unique constrain violation
+			Map<String, String> responseObj = new HashMap<String, String>();
+			responseObj.put("email","Email taken");
+			response = Response.status(Response.Status.CONFLICT).entity(responseObj);
+			return response.build();
+		}
+		catch (PersistenceException ex){
+			ex.printStackTrace();
+			response = Response.status(Status.BAD_REQUEST);
+			return response.build();
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+			response = Response.status(Status.BAD_REQUEST).entity(ex.getMessage()); 
+			return response.build();
+		} 
+    }
+	
+	
 	private File crearLicencia(final String version) {
 		       
 		/*Implemento la interface KeyStoreParam*/

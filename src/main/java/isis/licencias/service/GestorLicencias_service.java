@@ -62,11 +62,9 @@ public class GestorLicencias_service {
 	@Produces("text/*")
     public String getUsuarioLicenciado(@PathParam("dni") String dni) {
 		if (usuario.getUsuarioPorDNI(dni)!=null){
-			System.out.println("PASE 1");
 			return usuario.getUsuarioPorDNI(dni).getName();
 		}
 		else {
-			System.out.println("PASE 3");
 			return "No existe";
 		}
     }
@@ -195,7 +193,6 @@ public class GestorLicencias_service {
 			  					@FormParam("ST") String ST,
 			  					
 			  					@FormParam("C")
-    							@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
     							String C,
     							
     							@FormParam("tipo")

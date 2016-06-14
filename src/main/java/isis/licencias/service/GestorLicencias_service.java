@@ -193,11 +193,8 @@ public class GestorLicencias_service {
 			  					@FormParam("ST") String ST,
 			  					
 			  					@FormParam("C")
-    							String C,
-    							
-    							@FormParam("tipo")
-    							@NotNull
-    							String tipo) {
+    							@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
+    							String C) {
 
 		ResponseBuilder response = null;
 		
@@ -213,7 +210,8 @@ public class GestorLicencias_service {
 			newUsuario.setCountry(C);
 			
 			/* Tipos Licencia 2-Base_anual, 3-Base_perpetu, 4-Full_anual, 5-Full_perpetua */
-			this.tipo_licencia = Integer.parseInt(tipo);
+			System.out.println("ESTOY");
+			this.tipo_licencia = Integer.parseInt("2");
 			newUsuario.setTipo_Licencia(new Integer(tipo_licencia));
 			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 			

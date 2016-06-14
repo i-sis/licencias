@@ -62,9 +62,11 @@ public class GestorLicencias_service {
 	@Produces("text/*")
     public String getUsuarioLicenciado(@PathParam("dni") String dni) {
 		if (usuario.getUsuarioPorDNI(dni)!=null){
+			System.out.println("PASE 1");
 			return usuario.getUsuarioPorDNI(dni).getName();
 		}
 		else {
+			System.out.println("PASE 3");
 			return "No existe";
 		}
     }
@@ -197,6 +199,7 @@ public class GestorLicencias_service {
     							String C,
     							
     							@FormParam("tipo")
+    							@NotNull
     							String tipo) {
 
 		ResponseBuilder response = null;

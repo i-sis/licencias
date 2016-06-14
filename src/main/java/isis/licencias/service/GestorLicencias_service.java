@@ -194,11 +194,17 @@ public class GestorLicencias_service {
 			  					
 			  					@FormParam("C")
     							@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
-    							String C) {
+    							String C,
+    							
+    							@FormParam("tipo")
+    							@NotNull
+    							@NotEmpty
+    							String tipo) {
 
 		ResponseBuilder response = null;
 		
 		try {
+			System.out.println("AHORA SI");
 			newUsuario = new UsuarioLicenciado();
 			newUsuario.setName(CN);
 			newUsuario.setDni(dni);

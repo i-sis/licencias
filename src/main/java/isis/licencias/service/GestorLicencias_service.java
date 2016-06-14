@@ -215,7 +215,7 @@ public class GestorLicencias_service {
 			
 			/* Tipos Licencia 2-Base_anual, 3-Base_perpetu, 4-Full_anual, 5-Full_perpetua */
 			this.tipo_licencia = Integer.parseInt(tipo_lic);
-			newUsuario.setTipo_Licencia(tipo_licencia);
+			newUsuario.setTipo_Licencia(2);
 			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 			
 			usuario.createUsuario(newUsuario);

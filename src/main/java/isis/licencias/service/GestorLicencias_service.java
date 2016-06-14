@@ -55,7 +55,6 @@ public class GestorLicencias_service {
 	private KeyStoreParam privateKeyStoreParam;
 	private CipherParam cipherParam;
 	private LicenseParam licenseParam;
-	private int tipo_licencia;
 	
 	@GET
     @Path("{dni}")
@@ -112,8 +111,7 @@ public class GestorLicencias_service {
 			newUsuario.setEmail(email);
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
-			tipo_licencia = 1; //1 - Licencia tipo DEMO
-			newUsuario.setTipo_Licencia(tipo_licencia); 
+			newUsuario.setTipo_Licencia(new Integer(1)); 
 			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 			
 			usuario.createUsuario(newUsuario);
@@ -168,7 +166,8 @@ public class GestorLicencias_service {
 	@Path("tipo/Comercial")
     @Produces("application/octet-stream")
 	@ValidateRequest
-    public Response getLicencia_FULL(@FormParam("CN")
+    public Response getLicencia_FULL(
+    							@FormParam("CN")
     							@NotNull
     							String CN,
     							
@@ -196,9 +195,9 @@ public class GestorLicencias_service {
     							@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
     							String C,
     							
-    							@FormParam("tipo_lic")
+    							@FormParam("tipo_licencia")
     							@NotNull
-    							String tipo_lic) {
+    							String tipo_licencia) {
 
 		ResponseBuilder response = null;
 		
@@ -214,8 +213,7 @@ public class GestorLicencias_service {
 			newUsuario.setCountry(C);
 			
 			/* Tipos Licencia 2-Base_anual, 3-Base_perpetu, 4-Full_anual, 5-Full_perpetua */
-			this.tipo_licencia = Integer.parseInt("2");
-			newUsuario.setTipo_Licencia(tipo_licencia);
+			newUsuario.setTipo_Licencia(new Integer(tipo_licencia));
 			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 			
 			usuario.createUsuario(newUsuario);

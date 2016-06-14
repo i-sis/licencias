@@ -197,13 +197,11 @@ public class GestorLicencias_service {
     							String C,
     							
     							@FormParam("tipo")
-    							@NotNull
     							String tipo) {
 
 		ResponseBuilder response = null;
 		
 		try {
-			System.out.println("PASE");
 			newUsuario = new UsuarioLicenciado();
 			newUsuario.setName(CN);
 			newUsuario.setDni(dni);

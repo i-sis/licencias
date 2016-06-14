@@ -204,7 +204,6 @@ public class GestorLicencias_service {
 		ResponseBuilder response = null;
 		
 		try {
-			System.out.println("AHORA SI");
 			newUsuario = new UsuarioLicenciado();
 			newUsuario.setName(CN);
 			newUsuario.setDni(dni);
@@ -216,8 +215,7 @@ public class GestorLicencias_service {
 			newUsuario.setCountry(C);
 			
 			/* Tipos Licencia 2-Base_anual, 3-Base_perpetu, 4-Full_anual, 5-Full_perpetua */
-			System.out.println("ESTOY");
-			this.tipo_licencia = Integer.parseInt("2");
+			this.tipo_licencia = Integer.parseInt(tipo);
 			newUsuario.setTipo_Licencia(new Integer(tipo_licencia));
 			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 			

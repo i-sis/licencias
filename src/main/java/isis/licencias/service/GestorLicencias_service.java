@@ -214,7 +214,7 @@ public class GestorLicencias_service {
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
 			
-			/* Tipos Licencia 2-Base_anual, 3-Base_perpetu, 4-Full_anual, 5-Full_perpetua */
+			/* Tipos Licencia 2-Base_anual, 3-Base_perpetua, 4-Full_anual, 5-Full_perpetua, 6- Base_pruebaMensual, 7- Full_pruebaMensual */
 			this.tipo_licencia = Integer.parseInt(tipo);
 			newUsuario.setTipo_Licencia(new Integer(tipo_licencia));
 			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
@@ -223,7 +223,7 @@ public class GestorLicencias_service {
 			
 			/* Creo archivo temporal con la licencia */
 			File licencia_file;
-			if (this.tipo_licencia == 2 || this.tipo_licencia == 3) 
+			if (this.tipo_licencia == 2 || this.tipo_licencia == 3 || this.tipo_licencia == 6) 
 				licencia_file = crearLicencia("Firmador Digital v2.0 - BASE");
 			else
 				licencia_file = crearLicencia("Firmador Digital v2.0 - FULL");
@@ -355,12 +355,21 @@ public class GestorLicencias_service {
 		 Date now = new Date();
 		 result.setIssued(now);
 		 
-		  /* Evaluo según el tipo de licencia, si debo fijar una licencia a término */
+		  /* Evaluo según el tipo de licencia, si debo fijar una licencia a término anual */
 		 if (this.tipo_licencia == 2 || this.tipo_licencia == 4){
 			 /* si la licencia es de tipo Base_anual o Full_anual */
 			 now.setYear(now.getYear() + 1);
 			 result.setNotAfter(now);
 		 }
+  	    
+		 else if (this.tipo_licencia == 2 || this.tipo_licencia == 4){
+			 /* si la licencia es de tipo Base_pruebaMensual o Full_pruebaAnual */
+			 now.setMonth(now.getMonth() + 1);
+			 result.setNotAfter(now);
+		 }
+		 
+		 
+		 
 		 System.out.println("SUBJECT: " + licenseParam.getSubject() );
 		 result.setSubject(licenseParam.getSubject());
 		 return result;

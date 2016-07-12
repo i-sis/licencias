@@ -362,7 +362,7 @@ public class GestorLicencias_service {
 			 result.setNotAfter(now);
 		 }
   	    
-		 else if (this.tipo_licencia == 2 || this.tipo_licencia == 4){
+		 else if (this.tipo_licencia == 6 || this.tipo_licencia == 7){
 			 /* si la licencia es de tipo Base_pruebaMensual o Full_pruebaAnual */
 			 now.setMonth(now.getMonth() + 1);
 			 result.setNotAfter(now);

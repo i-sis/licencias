@@ -54,7 +54,8 @@ public class GestorLicencias_service {
 	private UsuarioLicenciado newUsuario;
 	private KeyStoreParam privateKeyStoreParam;
 	private CipherParam cipherParam;
-	private LicenseParam licenseParam; 
+	private LicenseParam licenseParam;
+	private int tipo_licencia;
 	
 	@GET
     @Path("{dni}")
@@ -111,7 +112,8 @@ public class GestorLicencias_service {
 			newUsuario.setEmail(email);
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
-			newUsuario.setTipo_Licencia(1); //1 - Licencia tipo DEMO
+			tipo_licencia = 1; //1 - Licencia tipo DEMO
+			newUsuario.setTipo_Licencia(tipo_licencia); 
 			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 			
 			usuario.createUsuario(newUsuario);
@@ -163,7 +165,7 @@ public class GestorLicencias_service {
     }
 	
 	@POST
-	@Path("tipo/FULL")
+	@Path("tipo/Comercial")
     @Produces("application/octet-stream")
 	@ValidateRequest
     public Response getLicencia_FULL(@FormParam("CN")
@@ -192,7 +194,11 @@ public class GestorLicencias_service {
 			  					
 			  					@FormParam("C")
     							@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
-    							String C) {
+    							String C,
+    							
+    							@FormParam("tipo_lic")
+    							@NotNull
+    							String tipo_lic) {
 
 		ResponseBuilder response = null;
 		
@@ -206,7 +212,10 @@ public class GestorLicencias_service {
 			newUsuario.setEmail(email);
 			newUsuario.setState(ST);
 			newUsuario.setCountry(C);
-			newUsuario.setTipo_Licencia(3); //3 - Licencia tipo FULL
+			
+			/* Tipos Licencia 2-Base_anual, 3-Base_perpetu, 4-Full_anual, 5-Full_perpetua */
+			this.tipo_licencia = Integer.parseInt(tipo_lic);
+			newUsuario.setTipo_Licencia(tipo_licencia);
 			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 			
 			usuario.createUsuario(newUsuario);
@@ -257,102 +266,6 @@ public class GestorLicencias_service {
 		} 
     }
 
-	
-	@POST
-	@Path("tipo/BASE")
-    @Produces("application/octet-stream")
-	@ValidateRequest
-    public Response getLicencia_BASE(@FormParam("CN")
-    							@NotNull
-    							String CN,
-    							
-			  					@FormParam("dni") 
-    							@NotNull
-    							@Pattern(regexp ="((DU|CUIT|CUIL)\\s)?\\d*", message = "debe ajustarse al formato numérico o a la cadena DU 8 dígitos o a la cadena CUIL o CUIT Y 11 dígitos")
-    							String dni,
-    							
-			  					@FormParam("title") String title, 
-			  					@FormParam("OU") String OU,
-			  					
-			  					@FormParam("O") 
-    							@Pattern(regexp = "[A-Za-zñáéíóúÑ.&-_0-9\\s]{2,50}$", message = "debe contener sólo letras y espacios")
-    							String O,
-			  					
-    							@FormParam("email")
-    							@NotNull
-    							@NotEmpty
-    							@Email (message= "Debe colocar una dirección de email bien formada")
-    							String email,
-    							
-			  					@FormParam("ST") String ST,
-			  					
-			  					@FormParam("C")
-    							@Pattern(regexp = "[A-Z][A-Z]", message = "debe contener un código de país válido")
-    							String C) {
-
-		ResponseBuilder response = null;
-		
-		try {
-			newUsuario = new UsuarioLicenciado();
-			newUsuario.setName(CN);
-			newUsuario.setDni(dni);
-			newUsuario.setTitle(title);
-			newUsuario.setOu(OU);
-			newUsuario.setOrganization(O);
-			newUsuario.setEmail(email);
-			newUsuario.setState(ST);
-			newUsuario.setCountry(C);
-			newUsuario.setTipo_Licencia(2); //2 - Licencia tipo BASE
-			newUsuario.setFecha(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
-			
-			usuario.createUsuario(newUsuario);
-			
-			/* Creo archivo temporal con la licencia */ 
-			File licencia_file = crearLicencia("Firmador Digital v2.0 - BASE");
-			response = Response.ok((Object) licencia_file);
-			
-			/* Devuelvo un arreglo de bytes con el contenido del archivo Licencia al cliente */ 
-			if (licencia_file != null){
-		        response = Response.ok((Object) licencia_file);
-		        return response.build();
-		 	}
-			else {
-	            response = Response.status(Status.BAD_REQUEST);
-	            return response.build();
-			}
-		}
-		catch (RollbackException ex){
-			ex.printStackTrace();
-			response = Response.status(Status.BAD_REQUEST);
-			return response.build();
-		}
-		
-		catch (ConstraintViolationException ex) {
-			ex.printStackTrace();
-			//Handle bean validation issues
-			response = Response.status(Status.BAD_REQUEST);
-			return response.build();
-		} 
-		catch (ValidationException ex) {
-			ex.printStackTrace();
-			//Handle the unique constrain violation
-			Map<String, String> responseObj = new HashMap<String, String>();
-			responseObj.put("email","Email taken");
-			response = Response.status(Response.Status.CONFLICT).entity(responseObj);
-			return response.build();
-		}
-		catch (PersistenceException ex){
-			ex.printStackTrace();
-			response = Response.status(Status.BAD_REQUEST);
-			return response.build();
-		}
-		catch (Exception ex){
-			ex.printStackTrace();
-			response = Response.status(Status.BAD_REQUEST).entity(ex.getMessage()); 
-			return response.build();
-		} 
-    }
-	
 	
 	private File crearLicencia(final String version) {
 		       
@@ -435,9 +348,13 @@ public class GestorLicencias_service {
 		 result.setInfo("Limita el número de usuarios/firmantes que pueden utilizar esta aplicación");
 		 Date now = new Date();
 		 result.setIssued(now);
-		  /* Descomentar las siguientes líneas para fijar una licencia a término */ 
-		 now.setYear(now.getYear() + 1);
-		 result.setNotAfter(now); 
+		 
+		  /* Evaluo según el tipo de licencia, si debo fijar una licencia a término */
+		 if (this.tipo_licencia == 2 || this.tipo_licencia == 4){
+			 /* si la licencia es de tipo Base_anual o Full_anual */
+			 now.setYear(now.getYear() + 1);
+			 result.setNotAfter(now);
+		 }
 		 System.out.println("SUBJECT: " + licenseParam.getSubject() );
 		 result.setSubject(licenseParam.getSubject());
 		 return result;
